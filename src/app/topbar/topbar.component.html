@@ -1,0 +1,5 @@
+<nav class="navbar navbar-dark bg-dark custom-navbar">
+  <div *ngFor="let item of navItems" class="nav-item">
+    <a [routerLink]="item.route == 'Home' ? [''] : [item.route]">{{item.name}}</a>
+  </div>
+</nav>
