@@ -40,7 +40,10 @@ export class ModelsComponent implements OnInit, OnDestroy {
   private camera!: THREE.PerspectiveCamera;
   private animationId!: number;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.selectedModelPath = this.project[0].path;
+    this.loadModel();
+  }
 
   ngOnDestroy(): void {
     this.cleanup();  
