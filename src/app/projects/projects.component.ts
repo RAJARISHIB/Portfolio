@@ -1,16 +1,32 @@
 import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+// import { FontAwsome } from '@angular/font-awesome';
 
-
-@Component({
+@Component ({
   selector: 'app-projects',
   standalone: true,
-  imports: [MatCardModule, CommonModule],
+  imports: [MatCardModule, CommonModule, HttpClientModule],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss'
 })
-export class ProjectsComponent{
+export class ProjectsComponent {
     
-  public project_list = ['Raspberri PI', 'Automated can washer', 'PCB Design and fabrication of Traffic management system']
+  public content_data : any = []
+  public full_screen = []
+
+  constructor(private http: HttpClient) {
+    this.http.get<{content: string}>('/assets/project_content/project_content.json').subscribe(data=>{
+      this.content_data = data
+      for(let content of this.content_data ) {
+        console.log(content)
+      }
+    })
+  }
+  
+  ngOnInit() {
+
+  }
+  
 }

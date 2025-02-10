@@ -1,9 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, model, OnDestroy, OnInit } from '@angular/core';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { ArcballControls } from 'three/examples/jsm/controls/ArcballControls.js';
 import { CommonModule } from '@angular/common';
-import { Toast, ToastrService } from 'ngx-toastr';
 
 interface Project{
   name : string;
@@ -17,22 +16,12 @@ interface Project{
   templateUrl: './models.component.html',
   styleUrls: ['./models.component.scss']
 })
-
-
-
 export class ModelsComponent implements OnInit, OnDestroy {
   
+  // All the model names should be saved as uppercase.glb
+  model_list = ['batman', 'engine', 'beltroller', 'mouse', 'screw_driver', 'whistle']
 
-  project: Project[] = [
-    {name: "BATMAN", path:"assets/batman.glb"},
-    {name: "ENGINE", path:"assets/engine.glb"},
-    {name: "BELT ROLLER", path:"assets/beltroller.glb"},
-    {name: "MOUSE", path:"assets/mouse.glb"},
-    {name: "SCREW DRIVER", path:"assets/screw_driver.glb"},
-    {name: "STAPLER", path:"assets/stapler.glb"},
-    {name: "WHISTLE", path:"assets/whistle.glb"}
-  ]
-
+  model: Project[] = []
 
   selectedModelPath!: string; 
   private renderer!: THREE.WebGLRenderer;
@@ -40,8 +29,16 @@ export class ModelsComponent implements OnInit, OnDestroy {
   private camera!: THREE.PerspectiveCamera;
   private animationId!: number;
 
+
   ngOnInit(): void {
-    this.selectedModelPath = this.project[0].path;
+    for(let model of this.model_list) {
+      this.model.push({
+        name: model.toUpperCase(),
+        path: `assets/3d_models/${model}.glb`
+      })
+    }
+
+    this.selectedModelPath = this.model[0].path;
     this.loadModel();
   }
 
@@ -49,9 +46,9 @@ export class ModelsComponent implements OnInit, OnDestroy {
     this.cleanup();  
   }
 
-  selectProject(project: Project): void {
+  selectProject(model: Project): void {
     this.cleanup();
-    this.selectedModelPath = project.path;
+    this.selectedModelPath = model.path;
     this.loadModel();
   }
 

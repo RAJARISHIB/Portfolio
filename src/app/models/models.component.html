@@ -1,8 +1,5 @@
 <div class="list">
-
-    <div *ngFor="let projects of project">
+    <div *ngFor="let projects of model">
         <button (click)="selectProject(projects)" class="btn btn-dark btn-spacing">{{projects.name}}</button>
     </div>
-
-    
 </div>
