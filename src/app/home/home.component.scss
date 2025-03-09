@@ -2,6 +2,38 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 80vh);
+  height: calc(90vh - 80vh);
   margin-top: 60px; 
+}
+
+.heading {
+display: inline-block ;
+justify-content: left;
+font-family: sans-serif;
+font-size: 2rem;
+line-height: 2;
+color: black;
+position: relative; 
+text-decoration: none;
+transition: transform 0.25s ease-out;
+margin-left: 100px;
+
+&::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0.125rem; 
+    bottom: 0;
+    left: 0;
+    background-color: black; 
+    transform: scaleX(0); 
+    transform-origin: bottom left right;
+    transition: transform 0.25s ease-out;
+}
+
+&:hover::after {
+    transform: scaleX(1); 
+    transform-origin: bottom left right; 
+    width: 100%;
+}
 }
