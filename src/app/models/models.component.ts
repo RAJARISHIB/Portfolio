@@ -1,6 +1,6 @@
 import { Component, model, OnDestroy, OnInit } from '@angular/core';
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { ArcballControls } from 'three/examples/jsm/controls/ArcballControls.js';
 import { CommonModule } from '@angular/common';
 
